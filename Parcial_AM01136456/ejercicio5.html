@@ -1,0 +1,53 @@
+<!--Composition Api-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input v-model="nuevatarea" placeholder="Añadir tarea">
+        <button @click="agregar">Añadir</button>
+        <ul>
+          <li v-for="tareas in tarea">
+            {{ tareas }}  
+            <button  @click="eliminarTarea(index)"> eliminar </button>
+          </li>
+        </ul>
+      </div>
+
+</body>
+</html>
+
+<script>
+const { createApp, ref } = Vue;
+
+createApp({
+  setup() {
+    const nuevatarea = ref('');
+    const tarea = ref([]);
+
+    const agregar = () => {
+      if (nuevatarea.value) {
+        tarea.value.push(nuevatarea.value);
+        nuevatarea.value = '';
+      }
+    };
+
+    const eliminarTarea = (index) => {
+      tarea.value.splice(index, 1   );
+    };
+
+    return { nuevatarea, tarea, agregar, eliminarTarea};
+  }
+}).mount('#app'); 
+</script>
+
+
+
+
+

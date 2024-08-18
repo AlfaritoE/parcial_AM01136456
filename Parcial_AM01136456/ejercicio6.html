@@ -1,0 +1,73 @@
+<!--Composition Api-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>Calculadora Simple</h2>
+        <input v-model.number="num1" placeholder="Número 1" type="number" />
+        <input v-model.number="num2" placeholder="Número 2" type="number" />
+
+        <div>
+            <button @click="operar('sumar')">Sumar</button>
+            <button @click="operar('restar')">Restar</button>
+            <button @click="operar('multiplicar')">Multiplicar</button>
+            <button @click="operar('dividir')">Dividir</button>
+        </div>
+
+        <div v-if="resultado !== null">
+            <h3>Resultado: {{ resultado }}</h3>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+        setup() {
+            const num1 = ref(0);
+            const num2 = ref(0);
+            const resultado = ref(null);
+
+            const operar = (operacion) => {
+                switch (operacion) {
+                    case 'sumar':
+                        resultado.value = num1.value + num2.value;
+                        break;
+                    case 'restar':
+                        resultado.value = num1.value - num2.value;
+                        break;
+                    case 'multiplicar':
+                        resultado.value = num1.value * num2.value;
+                        break;
+                    case 'dividir':
+                        if (num2.value !== 0) {
+                            resultado.value = num1.value / num2.value;
+                        } else {
+                            alert('No se puede dividir entre 0');
+                            resultado.value = null;
+                        }
+                        break;
+                    default:
+                        resultado.value = null;
+                }
+            };
+            return {
+                num1,
+                num2,
+                resultado,
+                operar,
+            };
+        }
+    }).mount('#app');
+
+</script>

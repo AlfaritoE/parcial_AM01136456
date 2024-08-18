@@ -1,0 +1,35 @@
+<!--Composition Api-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <input v-model="mensaje" placeholder="texto">
+       <button @click="MostrarAlerta"> mostrar alerta </button>
+
+        
+    </div>
+</body>
+</html>
+
+<script>
+const { createApp, ref } = Vue;
+
+createApp({
+  setup() {
+   const mensaje = ref ('');
+
+   const MostrarAlerta = () => {
+    alert(mensaje.value);
+   };
+
+   return {mensaje, MostrarAlerta};
+
+  }
+}).mount('#app');
+</script>

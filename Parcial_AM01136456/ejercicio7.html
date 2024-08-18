@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div :class="themeClass" id="app" >
+        <button @click="toggleTheme">Cambiar a {{ isDarkTheme ? 'Tema Claro' : 'Tema Oscuro' }}</button>
+        <h1>¡Bienvenido a la aplicación con temas!</h1>
+        <p>Este es un ejemplo de cómo alternar entre temas claro y oscuro.</p>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const { createApp, ref, computed } = Vue;
+
+    createApp({
+        setup() {
+
+            const isDarkTheme = ref(false);
+
+            const toggleTheme = () => {
+                isDarkTheme.value = !isDarkTheme.value;
+                console.log('Tema oscuro:', isDarkTheme.value);
+            };
+            const themeClass = computed(() => (isDarkTheme.value ? 'dark-theme' : 'light-theme'));
+
+            return {
+                isDarkTheme,
+                toggleTheme,
+                themeClass,
+            };
+
+        }
+    }).mount('#app');
+</script>
+
+<style>
+    #app.dark-theme {
+  background-color: black;
+  color: white;
+}
+
+#app.light-theme {
+  background-color: white;
+  color: black;
+}
+</style>

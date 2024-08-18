@@ -1,0 +1,35 @@
+<!--Composition Api-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="mostrarMensaje">
+          {{ mostrar ? 'Ocultar' : 'Mostrar' }} texto
+        </button>
+        <p v-if="mostrar">Esto es una prueba</p>
+    </div>
+</body>
+</html>
+
+<script>
+    const { createApp, ref } = Vue;
+
+createApp({
+  setup() {
+
+    const mostrar = ref(true);
+
+    const mostrarMensaje = () => {
+        mostrar.value = !mostrar.value;
+
+    };
+    return {mostrar, mostrarMensaje};
+  }
+}).mount('#app');
+</script>
